@@ -2,6 +2,7 @@ ACLOCAL_AMFLAGS = -I config
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 SUBDIRS = cmd lib plugins etc
 =======
 SUBDIRS = cmd lib plugins
@@ -9,3 +10,6 @@ SUBDIRS = cmd lib plugins
 =======
 SUBDIRS = cmd lib
 >>>>>>> e87efd9... build: add Makefile, update configure.ac to install translation lib
+=======
+SUBDIRS = cmd
+>>>>>>> 8504cd3... build: add basic autotools files to enable building

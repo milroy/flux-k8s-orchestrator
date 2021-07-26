@@ -10,10 +10,15 @@ AC_CONFIG_SRCDIR([NEWS])
 
 AM_INIT_AUTOMAKE([subdir-objects tar-ustar filename-length-max=256 foreign])
 AM_SILENT_RULES([yes])
+<<<<<<< HEAD
+=======
+# AM_CONFIG_HEADER([config.h])
+>>>>>>> 8504cd3... build: add basic autotools files to enable building
 AM_MAINTAINER_MODE([enable])
 
 AC_PREFIX_PROGRAM([flux])
 
+<<<<<<< HEAD
 LT_INIT([dlopen])
 
 PKG_PROG_PKG_CONFIG
@@ -27,6 +32,10 @@ AC_PROG_LN_S
 AC_PROG_MAKE_SET
 AM_PROG_CC_C_O
 
+=======
+# Check for C compiler
+# AC_PROG_CC
+>>>>>>> 8504cd3... build: add basic autotools files to enable building
 # We can add more checks in this section
 AX_FLUX_CORE
 
@@ -43,6 +52,7 @@ AM_CHECK_PYMOD(openshift,
                [StrictVersion(openshift.__version__) >= StrictVersion('0.11.2')], [],
                [AC_MSG_ERROR([[could not find python module openshift, version 0.11.2+ required]])])
 
+<<<<<<< HEAD
 #
 # Project directories
 #
@@ -82,6 +92,12 @@ AC_CONFIG_FILES([Makefile
 =======
   lib/Makefile])
 >>>>>>> e87efd9... build: add Makefile, update configure.ac to install translation lib
+=======
+# Tells automake to create a Makefile
+# See https://www.gnu.org/software/automake/manual/html_node/Requirements.html
+AC_CONFIG_FILES([Makefile
+  cmd/Makefile])
+>>>>>>> 8504cd3... build: add basic autotools files to enable building
 
 # Generate the output
 AC_OUTPUT
