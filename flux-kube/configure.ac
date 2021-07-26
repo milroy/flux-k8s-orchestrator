@@ -49,6 +49,7 @@ AM_CHECK_PYMOD(openshift,
 AS_VAR_SET(fluxcmddir, $libexecdir/flux/cmd)
 AC_SUBST(fluxcmddir)
 
+<<<<<<< HEAD
 AS_VAR_SET(jobtap_plugindir, $libdir/flux/job-manager/plugins)
 AC_SUBST(jobtap_plugindir)
 
@@ -64,6 +65,8 @@ AC_SUBST(fluxrc1dir)
 fluxplugin_ldflags="-avoid-version -export-symbols-regex '^flux_plugin_init\$\$' --disable-static -shared -export-dynamic -module"
 AC_SUBST(fluxplugin_ldflags)
 
+=======
+>>>>>>> 6b026e2... build: add fluxcmddir and Makefile to copy flux-kube
 # Tells automake to create a Makefile
 # See https://www.gnu.org/software/automake/manual/html_node/Requirements.html
 AC_CONFIG_FILES([Makefile
