@@ -1,5 +1,9 @@
 ##############################################################
+<<<<<<< HEAD
 # Copyright 2021 Lawrence Livermore National Security, LLC
+=======
+# Copyright 2020 Lawrence Livermore National Security, LLC
+>>>>>>> 6add22a... flux-kube: add skeleton flux-kube command
 # (c.f. AUTHORS, NOTICE.LLNS, COPYING)
 #
 # This file is part of the Flux resource manager framework.
@@ -10,6 +14,7 @@
 
 import logging
 import argparse
+<<<<<<< HEAD
 import urllib3
 import yaml
 import subprocess
@@ -22,21 +27,46 @@ from openshift.dynamic import DynamicClient
 import flux
 from flux import util
 from flux.constants import FLUX_MSGTYPE_REQUEST
+=======
+
+from kubernetes import client, config
+from openshift.dynamic import DynamicClient
+
+from flux import util
+>>>>>>> 6add22a... flux-kube: add skeleton flux-kube command
 
 
 class KubeCmd:
     """
+<<<<<<< HEAD
     KubeCmd is the base class for all flux-kube subcommands. 
     While all derived classes interface with K8s and OpenShift, 
     much of the functionality requires OpenShift templates. 
     The functionality will be extended to interface with 
     base K8s CRDs (which can replicate the template functionality) 
     in the future.
+=======
+    KubeCmd is the base class for all flux-kube subcommands
+>>>>>>> 6add22a... flux-kube: add skeleton flux-kube command
     """
 
     def __init__(self, **kwargs):
         self.parser = self.create_parser()
 
+<<<<<<< HEAD
+=======
+        k8s_client = config.new_client_from_config()
+        try:
+            self.dyn_client = DynamicClient(k8s_client)
+        except client.rest.ApiException as rest_exception:
+            if rest_exception.status == 403:
+                raise Exception(
+                    "You must be logged in to the K8s or OpenShift"
+                    " cluster to continue"
+                )
+            raise
+
+>>>>>>> 6add22a... flux-kube: add skeleton flux-kube command
     @staticmethod
     def create_parser():
         """
@@ -50,18 +80,30 @@ class KubeCmd:
         return self.parser
 
 
+<<<<<<< HEAD
 class InitKube(KubeCmd):
     """
     InitKube initializes Kube/Openshift
     """
 
     def __init__(self, **kwargs):
+=======
+class GetDeploymentsCmd(KubeCmd):
+    """
+    GetDeploymentsCmd gets all the user's
+    deployments in the specified namespace
+    and prints all their attributes.
+    """
+
+    def __init__(self):
+>>>>>>> 6add22a... flux-kube: add skeleton flux-kube command
         super().__init__()
 
         self.parser.add_argument(
             "-n",
             "--namespace",
             type=str,
+<<<<<<< HEAD
             default="openshift",
             metavar="N",
             help="OpenShift/K8s namespace",
@@ -405,6 +447,31 @@ class FluxKubeDaemon:
         cancel_watcher.start()
 
         self.flux_h.reactor_run()
+=======
+            metavar="N",
+            help="Namespace of deployment",
+        )
+
+    def main(self, args):
+        v1_depl = self.dyn_client.resources.get(api_version="v1", kind="Deployment")
+        try:
+            depl_list = v1_depl.get(namespace=args.namespace)
+        except client.rest.ApiException as rest_exception:
+            if rest_exception.status == 403:
+                raise Exception(
+                    "You do not have permission to list deployments in namespace",
+                    args.namespace,
+                )
+            raise
+
+        if depl_list.items:
+            for depl in depl_list.items:
+                print("Deployment name:", depl.metadata.name)
+                for item in depl:
+                    print(item)
+        else:
+            print("No deployments in namespace", args.namespace)
+>>>>>>> 6add22a... flux-kube: add skeleton flux-kube command
 
 
 LOGGER = logging.getLogger("flux-kube")
@@ -413,14 +480,18 @@ LOGGER = logging.getLogger("flux-kube")
 @util.CLIMain(LOGGER)
 def main():
 
+<<<<<<< HEAD
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+=======
+>>>>>>> 6add22a... flux-kube: add skeleton flux-kube command
     parser = argparse.ArgumentParser(prog="flux-kube")
     subparsers = parser.add_subparsers(
         title="supported subcommands", description="", dest="subcommand"
     )
     subparsers.required = True
 
+<<<<<<< HEAD
     get = GetCmd()
     get_parser_sub = subparsers.add_parser(
         "get",
@@ -477,6 +548,16 @@ def main():
         formatter_class=util.help_formatter(),
     )
     daemon_parser_sub.set_defaults(func=daemon.main)
+=======
+    getdeployments = GetDeploymentsCmd()
+    getdeployments_parser_sub = subparsers.add_parser(
+        "getdeployments",
+        parents=[getdeployments.get_parser()],
+        help="get K8s deployment details",
+        formatter_class=util.help_formatter(),
+    )
+    getdeployments_parser_sub.set_defaults(func=getdeployments.main)
+>>>>>>> 6add22a... flux-kube: add skeleton flux-kube command
 
     args = parser.parse_args()
     args.func(args)
