@@ -28,6 +28,7 @@ PYTHON=/path/to/python3 ./configure
 make
 make install
 ```
+<<<<<<< HEAD
 
 #### Using the Unified Interface
 The interface provides a convenient way for users to start and stop orchestrated (i.e., OpenShift) tasks.  The interface allows users to submit High Performance Computing (HPC) and orchestrated tasks through Flux, reducing the barrier to entry to managing converged workflows.  The interface can manage site-specific OpenShift resources called templates, which are maintained by OpenShift administrators.  In the future, the interface will be extended to create and delete base Kubernetes [Custom Resource Definitions](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/) (CRDs).
@@ -198,3 +199,5 @@ No resources found in user namespace.
 $ flux kube get route  
 No resources found in user namespace.
 ```
+=======
+>>>>>>> 12bf54a... updated README with description and basic installation instructions
