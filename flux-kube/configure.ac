@@ -68,6 +68,7 @@ AC_SUBST(fluxplugin_ldflags)
 # See https://www.gnu.org/software/automake/manual/html_node/Requirements.html
 AC_CONFIG_FILES([Makefile
   cmd/Makefile
+<<<<<<< HEAD
   lib/Makefile
 <<<<<<< HEAD
   plugins/Makefile
@@ -75,6 +76,9 @@ AC_CONFIG_FILES([Makefile
 =======
   plugins/Makefile])
 >>>>>>> 56f0449... build: update configure.ac, add Makefile to build and install plugin
+=======
+  lib/Makefile])
+>>>>>>> e87efd9... build: add Makefile, update configure.ac to install translation lib
 
 # Generate the output
 AC_OUTPUT
